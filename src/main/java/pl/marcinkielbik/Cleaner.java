@@ -1,6 +1,7 @@
 package pl.marcinkielbik;
 
 import java.io.File;
+import java.text.DecimalFormat;
 
 public class Cleaner {
 
@@ -35,6 +36,17 @@ public class Cleaner {
           return 0;
       }
 
+    }
+
+    protected String readableFileSize(long size) {
+        if (size == 0) {
+            return "0.0 B";
+        }
+
+        final String[] units = {"B", "KB", "MB", "GB", "TB"};
+
+        int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
+        return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
     }
 
 }
